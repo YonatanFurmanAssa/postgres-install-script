@@ -40,7 +40,7 @@ sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg
 # installaition of the package using apt 
 
 
- banner psql --version
+ banner `psql --version`
 
 # checking the version 
 
