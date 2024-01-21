@@ -86,3 +86,5 @@ host    replication     all             ::1/128                 trust
 # host    replication     all             127.0.0.1/32            md5
 # host    replication     all             ::1/128                 md5
 # ' > pg_hba.conf
+
+# then to enter the shell in a secure manner, use "psql -U 'yourUserName'"
