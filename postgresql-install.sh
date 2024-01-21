@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Prerequisites
-# 1. Change permissions to the script File itself ( chmod 764 postgresql-install.sh )
+# 1. Change permissions to the script File ( chmod 764 postgresql-install.sh )
 # 2. Run the script as a sudo user ( sudo ./postgresql-install.sh )
 
 
@@ -44,4 +44,45 @@ sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg
 
 # checking the version 
 
+# change {YourVersion} to your real version
 
+ cd /etc/postgresql/{YourVersion}/main/
+
+echo 'local   all             postgres                                trust
+
+ TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+"local" is for Unix domain socket connections only
+local   all             all                                     trust
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+# IPv6 local connections:
+host    all             all             ::1/128                 trust
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+local   replication     all                                     trust
+host    replication     all             127.0.0.1/32            trust
+host    replication     all             ::1/128                 trust
+' > pg_hba.conf
+
+# Then write psql -U postgres and in the shell itself perform the nexgt action 
+# CREATE USER new_username WITH PASSWORD 'new_password';
+
+# After succesfully excutaing the previous step, then we reset 
+# echo 
+# 'local   all             postgres                                md5
+#
+# # TYPE  DATABASE        USER            ADDRESS                 METHOD
+#
+# # "local" is for Unix domain socket connections only
+# local   all             all                                     md5
+# # IPv4 local connections:
+# host    all             all             127.0.0.1/32            md5
+# # IPv6 local connections:
+# host    all             all             ::1/128                 md5
+# # Allow replication connections from localhost, by a user with the
+# # replication privilege.
+# local   replication     all                                     md5
+# host    replication     all             127.0.0.1/32            md5
+# host    replication     all             ::1/128                 md5
+# ' > pg_hba.conf
